@@ -15,11 +15,11 @@ class population():
         initial_string = "\nPopulation\n"
 
         for c in self._population:
-            initial_string +=str(c.get_chromosome()) + "\t Fitness: "+ str(population.fitness_function(c)) + '\n'
+            initial_string +=str(c.get_chromosome()) + "\t Fitness: "+ str(self.fitness_function(c)) + '\n'
         
         return initial_string
     
-    def fitness_function(chromosome : chromosome.chromosome):
+    def fitness_function(self,chromosome : chromosome.chromosome):
         # default fitness function, can be overriden
         # gets a chromosome and returns how much it is fit on a scale of 0 to 255
         fitness = 0
@@ -40,8 +40,8 @@ class population():
             max_fit = 0
             max_chromo = 0
             for chromosome in self._population:
-                if (population.fitness_function(chromosome) >= max_fit):
-                    max_fit = population.fitness_function(chromosome)
+                if (self.fitness_function(chromosome) >= max_fit):
+                    max_fit = self.fitness_function(chromosome)
                     max_chromo = chromosome
             # at the end add to the new population
             new_population.append(max_chromo)
