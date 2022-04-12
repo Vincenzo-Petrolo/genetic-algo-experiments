@@ -15,35 +15,33 @@ class population():
         initial_string = "\nPopulation\n"
 
         for c in self._population:
-            initial_string +=str(c.get_chromosome()) + "\t Fitness: "+ str(self.fitness_function(c)) + '\n'
+            initial_string +=str(c.get_chromosome()) + "\t Fitness: "+ str(population.fitness_function(c)) + '\n'
         
         return initial_string
     
-    def fitness_function(self,chromosome):
+    def fitness_function(chromosome : chromosome.chromosome):
         # default fitness function, can be overriden
         # gets a chromosome and returns how much it is fit on a scale of 0 to 255
         fitness = 0
-        MAX = 255
         for i in range(0,len(chromosome.get_chromosome())):
             if (i % 2 == 0):
                 # if gene is even returns a contribute of
                 if (chromosome.get_chromosome()[i] == 1):
-                    fitness += MAX/(len(chromosome.get_chromosome())/2)
-                #else:
-                   # fitness -= MAX/len(chromosome.get_chromosome())
+                    fitness += 10
+                else:
+                    fitness -= 10
         
         return fitness
     
     def selection(self,top_n_chromosomes):
-        fitness_list = []
         new_population = []
         
         for i in range(0,top_n_chromosomes):
             max_fit = 0
             max_chromo = 0
             for chromosome in self._population:
-                if (self.fitness_function(chromosome) >= max_fit):
-                    max_fit = self.fitness_function(chromosome)
+                if (population.fitness_function(chromosome) >= max_fit):
+                    max_fit = population.fitness_function(chromosome)
                     max_chromo = chromosome
             # at the end add to the new population
             new_population.append(max_chromo)
@@ -85,7 +83,6 @@ class population():
             for parent in self._population:
                 print(parent.get_chromosome())
                 if (offspring.get_chromosome() == parent.get_chromosome()):
-                    print(f"Found {offspring.get_chromosome()} == {parent.get_chromosome()}")
                     equal += 1
                     break
         

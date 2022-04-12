@@ -1,4 +1,9 @@
+from chromosome import chromosome
 import population
+
+# define your own fitness function
+def fitness_function(chromosome : chromosome):
+    return 0
 
 def main():
 
